@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Poppins:wght@400;600;700&display=swap');
+* {
+    font-family: 'Fira Sans';
+    margin: 0;
+    padding: 0;
+}
+header {
+    background: #487c1e;
+    padding: 15px;
+    
+}
+.headerplus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main-link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+.search {
+    font-size: 20px;
+    width: 1000px;
+    line-height: 2.5;
+    margin-left: 100px;
+  }
+.search::placeholder {
+    color: #acacac;
+    font-family: 'Fira Sans';
+  }
+input {
+    padding-left: 20px;
+    border-radius: 15px;
+    border-width: 0px;
+  }
+.main-link:hover {
+  opacity: 0.9;
+}
