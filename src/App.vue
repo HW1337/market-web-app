@@ -1,30 +1,65 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+        <header>
+        <div class="headerplus">
+        <h1><a href="index.html" class="main-link">HOMESHROOMS</a></h1>
+        <form action="/search" method="get">
+            <input type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
+        </form>
+        </div>
+    </header>
+    <ProductList />
 </template>
 
+<script>
+import ProductList from './components/ProductList.vue';
+
+export default {
+  components: {
+    ProductList,
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Poppins:wght@400;600;700&display=swap');
+* {
+    font-family: 'Fira Sans';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-nav {
-  padding: 30px;
+header {
+    background: #1ead3d;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.headerplus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.main-link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+.main-link:hover {
+  color: #000;
 }
+.search {
+    font-size: 20px;
+    width: 50vw;
+    line-height: 2.5;
+    margin-left: 5vw;
+  }
+.search::placeholder {
+    color: #acacac;
+    font-family: 'Fira Sans';
+  }
+input {
+    padding-left: 20px;
+    border-radius: 15px;
+    border-width: 0px;
+  }
 </style>
