@@ -9,6 +9,9 @@
   import ProductCard from './ProductCard.vue';
   
   export default {
+    components: {
+      ProductCard
+    },
     data() {
       return {
         products: [],
@@ -22,9 +25,6 @@
         .catch(error => {
           console.error('Error fetching products:', error);
         });
-    },
-    components: {
-      ProductCard,
     },
   };
   </script>
