@@ -5,6 +5,7 @@
         <form action="/search" method="get">
             <input type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
         </form>
+        <h3 class="cart">Корзина: </h3>
         </div>
     </header>
     <ProductList />
@@ -44,6 +45,9 @@ header {
     color: #ffffff;
     text-decoration: none;
   }
+.cart {
+    color: #ffffff;
+  }
 .main-link:hover {
   color: #000;
 }
@@ -52,6 +56,7 @@ header {
     width: 50vw;
     line-height: 2.5;
     margin-left: 5vw;
+    margin-right: 5vw;
   }
 .search::placeholder {
     color: #acacac;
