@@ -2,16 +2,23 @@
     <header>
     <div class="headerplus">
     <h1><a href="index.html" class="main-link">HOMESHROOMS</a></h1>
-    <form @submit.prevent action="/search" method="get">
-        <input type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
-    </form>
+    <input v-model="searchTerm" @input="search" type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
     </div>
 </header>
 </template>
 
 <script>
 export default {
-
+    data() {
+        return {
+            searchTerm: '',
+        }
+    },
+    methods: {
+    search() {
+      this.$emit('search', this.searchTerm);
+    },
+  },
 };
 </script>
 
@@ -26,7 +33,7 @@ z-index: 1000;
 .headerplus {
 display: flex;
 align-items: center;
-justify-content: center;
+margin-left: 13vw;
 }
 .main-link {
 color: #ffffff;
