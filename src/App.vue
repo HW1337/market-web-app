@@ -5,10 +5,10 @@
         <form action="/search" method="get">
             <input type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
         </form>
-        <h3 class="cart">Корзина: </h3>
+        <h3 class="cart">Корзина: {{ amount }}</h3>
         </div>
     </header>
-    <ProductList />
+    <ProductList @increaseAmount="amount+=1"/>
 </template>
 
 <script>
@@ -18,6 +18,11 @@ export default {
   components: {
     ProductList,
   },
+  data() {
+    return {
+      amount: 0,
+    }
+  }
 };
 </script>
 
