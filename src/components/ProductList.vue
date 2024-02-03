@@ -1,6 +1,6 @@
 <template>
     <div class="card-container">
-      <div class="card" v-for="product in products" :key="product.id" :product="product">
+      <div class="card" v-for="product in filteredProducts" :key="product.id" :product="product">
         <div class="image-container">
           <img :src="product.image" alt="Картинка">
         </div>
@@ -17,6 +17,10 @@
   import axios from 'axios';
 
   export default {
+    props: {
+    products: Array,
+    searchQuery: String,
+    },
     data() {
       return {
         products: [],
@@ -42,6 +46,16 @@
         truncatedTitle += '...';
       }
       return truncatedTitle;
+    },
+  },
+  computed: {
+    filteredProducts() {
+      if (!this.searchQuery) {
+        return this.products;
+      }
+
+      const searchTerm = this.searchQuery.toLowerCase();
+      return this.products.filter(product => product.title.toLowerCase().includes(searchTerm));
     },
   },
   };
