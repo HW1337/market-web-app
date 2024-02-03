@@ -5,24 +5,13 @@
     <form @submit.prevent action="/search" method="get">
         <input type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
     </form>
-    <h3 class="cart">Корзина: {{ amount }}</h3>
     </div>
 </header>
-<ProductList @increaseAmount="amount+=1"/>
 </template>
 
 <script>
-import ProductList from '@/components/ProductList.vue';
-
 export default {
-    components: {
-        ProductList,
-    },
-    data() {
-        return {
-            amount: 0,
-        }
-    }
+
 };
 </script>
 

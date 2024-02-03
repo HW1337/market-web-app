@@ -1,13 +1,16 @@
 <template>
   <SearchHeader />
+  <ProductList />
 </template>
 
 <script>
+import ProductList from '@/components/ProductList.vue';
 import SearchHeader from '@/components/SearchHeader.vue';
 
 export default {
   components: {
     SearchHeader,
+    ProductList,
   },
 };
 </script>

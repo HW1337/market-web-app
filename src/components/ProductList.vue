@@ -7,7 +7,7 @@
             <h3 class="title">{{ truncateTitle(product.title, 12, 60) }}</h3>
             <div class="buy">
             <span class="price">{{ product.price }}$</span>
-            <button @click="$emit('increaseAmount')" class="add-to-cart">В корзину</button>
+            <button class="add-to-cart">В корзину</button>
             </div>
     </div>
     </div>
