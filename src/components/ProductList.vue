@@ -138,7 +138,7 @@
     transform: translateY(0);
   }
   25%, 75% {
-    transform: translateY(3px);
+    transform: translateY(2px);
   }
   50% {
     transform: translateY(-1px);
