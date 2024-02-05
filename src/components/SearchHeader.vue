@@ -1,7 +1,7 @@
 <template>
     <header>
     <div class="headerplus">
-    <div><a href="index.html" class="main-link">HOMESHROOMS</a></div>
+    <div><a class="main-link" href="index.html"><img class="logo" src="favicon.ico">HOMESHROOMS</a></div>
     <div class="input-container">
     <input v-model="searchTerm" @input="searchMethod" type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
     <button class="cart">🛒</button>
@@ -39,10 +39,21 @@ align-items: center;
 justify-content: center;
 }
 .main-link {
-color: #ffffff;
-text-decoration: none;
-font-size: 32px;
-font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: bold;
+}
+.logo:hover {
+  animation: shake 0.5s ease;
+}
+.logo {
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 10px;
+  padding: 4px;
 }
 .input-container {
   position: relative;
@@ -60,13 +71,10 @@ font-weight: bold;
   margin-bottom: 5px;
 }
 .cart:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .cart:active {
-  animation: shake 0.1s ease;
-}
-.main-link:hover {
-color: #000;
+  animation: shake 3.1s ease;
 }
 .search {
 font-size: 20px;
