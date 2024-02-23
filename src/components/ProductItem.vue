@@ -6,7 +6,7 @@
         <h3 class="title">{{ truncateTitle(product.title, 12, 60) }}</h3>
         <div class="buy">
             <span class="price">{{ product.price }}$</span>
-            <button class="add-to-cart">В корзину</button>
+            <cart-button class="add-to-cart">В корзину</cart-button>
         </div>
     </div>
 </template>
@@ -89,17 +89,7 @@ export default {
     margin-right: 10px;
 }
 
-.add-to-cart {
-    background-color: rgb(51, 151, 68);
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
+
 
 .add-to-cart:hover {
     background-color: rgb(57, 175, 77);
