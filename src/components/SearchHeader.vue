@@ -3,7 +3,7 @@
     <div class="headerplus">
     <div><a class="main-link" href="index.html"><img class="logo" src="favicon.ico">HOMESHROOMS</a></div>
     <div class="input-container">
-    <input v-model="searchTerm" @input="searchMethod" type="text" name="query" placeholder="Найти на Homeshrooms" class="search">
+    <search-input v-model="searchTerm" @input="searchMethod" type="text" name="query" placeholder="Найти на Homeshrooms" class="search"></search-input>
     <button class="cart">🛒</button>
     </div>
     </div>
