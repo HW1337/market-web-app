@@ -89,34 +89,6 @@ export default {
     margin-right: 10px;
 }
 
-
-
-.add-to-cart:hover {
-    background-color: rgb(57, 175, 77);
-}
-
-.add-to-cart:active {
-    animation: shake 0.1s ease;
-    background-color: rgb(0, 185, 15);
-}
-
-@keyframes shake {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    25%,
-    75% {
-        transform: translateY(2px);
-    }
-
-    50% {
-        transform: translateY(-1px);
-    }
-}
-
 .buy {
     position: absolute;
     bottom: 10px;
