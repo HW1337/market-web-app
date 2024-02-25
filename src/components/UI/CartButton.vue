@@ -20,4 +20,29 @@
     opacity: 0;
     transition: opacity 0.5s ease;
 }
+.button:hover {
+    background-color: rgb(57, 175, 77);
+}
+
+.button:active {
+    animation: shake 0.1s ease;
+    background-color: rgb(0, 185, 15);
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25%,
+    75% {
+        transform: translateY(2px);
+    }
+
+    50% {
+        transform: translateY(-1px);
+    }
+}
 </style>
