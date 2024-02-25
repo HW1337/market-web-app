@@ -54,7 +54,9 @@ export default {
 .card:hover {
     transform: scale(1.1);
 }
-
+.add-to-cart {
+    opacity: 0;
+}
 .card:hover .add-to-cart {
     opacity: 1;
 }
