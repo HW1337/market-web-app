@@ -17,7 +17,6 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
-    opacity: 0;
     transition: opacity 0.5s ease;
 }
 .button:hover {
