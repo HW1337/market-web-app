@@ -1,12 +1,13 @@
 <template>
   <SearchHeader @search="updateSearchTerm" @cart="makeCartVisible"/>
-  <ProductList :products="products" :searchQuery="searchTerm" />
-  <cart-dialog v-model:show="cartVisible"></cart-dialog>
+  <ProductList :products="products" :searchQuery="searchTerm" @addToCart="addToCart"/>
+  <cart-dialog v-model:show="cartVisible" ><Cart :cart="cart"/></cart-dialog>
 </template>
 
 <script>
 import ProductList from '@/components/ProductList.vue';
 import SearchHeader from '@/components/SearchHeader.vue';
+import Cart from '@/components/Cart.vue';
 
 export default {
   data() {
@@ -14,11 +15,13 @@ export default {
       products: [],
       searchTerm: '',
       cartVisible: false,
+      cart: []
     };
   },
   components: {
     SearchHeader,
     ProductList,
+    Cart,
   },
   methods: {
     updateSearchTerm(term) {
@@ -26,6 +29,9 @@ export default {
     },
     makeCartVisible() {
       this.cartVisible = true;
+    },
+    addToCart(item) {
+      this.cart.push(item)
     }
   },
 };
