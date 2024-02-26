@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <ProductItem v-for="product in filteredProducts" :key="product.id" :product="product" />
+    <ProductItem v-for="product in filteredProducts" :key="product.id" :product="product" @addToCart="addToCart"/>
   </div>
 </template>
   
@@ -31,7 +31,9 @@ export default {
       });
   },
   methods: {
-
+    addToCart(item) {
+      this.$emit("addToCart", item)
+    }
   },
   computed: {
     filteredProducts() {
