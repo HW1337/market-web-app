@@ -49,6 +49,7 @@ export default {
     text-align: center;
     transition: transform 0.3s ease;
     position: relative;
+    box-shadow: 3px 3px 15px grey;
 }
 
 .card:hover {
@@ -56,6 +57,7 @@ export default {
 }
 .add-to-cart {
     opacity: 0;
+    box-shadow: 3px 3px 15px grey;
 }
 .card:hover .add-to-cart {
     opacity: 1;
