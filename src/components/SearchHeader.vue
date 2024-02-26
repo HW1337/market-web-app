@@ -1,23 +1,24 @@
 <template>
-    <header>
+  <header>
     <div class="headerplus">
-    <div><a class="main-link" href="index.html"><img class="logo" src="favicon.ico">HOMESHROOMS</a></div>
-    <div class="input-container">
-    <search-input v-model="searchTerm" @input="searchMethod" type="text" name="query" placeholder="Найти на Homeshrooms" class="search"></search-input>
-    <cart-button class="cart">Корзина</cart-button>
+      <div><a class="main-link" href="index.html"><img class="logo" src="favicon.ico">HOMESHROOMS</a></div>
+      <div class="input-container">
+        <search-input v-model="searchTerm" @input="searchMethod" type="text" name="query"
+          placeholder="Найти на Homeshrooms" class="search"></search-input>
+        <cart-button class="cart" @click="this.$emit('cart');">Корзина</cart-button>
+      </div>
     </div>
-    </div>
-</header>
+  </header>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            searchTerm: '',
-        }
-    },
-    methods: {
+  data() {
+    return {
+      searchTerm: '',
+    }
+  },
+  methods: {
     searchMethod() {
       this.$emit('search', this.searchTerm);
     },
@@ -27,17 +28,19 @@ export default {
 
 <style>
 header {
-background: #1ead3d;
-padding: 15px;
-position: fixed;
-width: 100%;
-z-index: 1000;
+  background: #1ead3d;
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
+
 .headerplus {
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .main-link {
   display: flex;
   align-items: center;
@@ -46,41 +49,54 @@ justify-content: center;
   font-size: 32px;
   font-weight: bold;
 }
+
 .logo:hover {
   animation: shake 0.5s ease;
 }
+
 .logo {
   height: 50px;
   margin-right: 10px;
   border-radius: 10px;
   padding: 4px;
 }
+
 .input-container {
   position: relative;
   display: flex;
   align-items: center;
 }
+
 .cart {
   position: absolute;
   right: 0;
   margin: 5px;
   font-size: 18px !important;
-  opacity: 0.85;
+  background-color: #1ead3d !important;
+}
+
+.cart:hover {
+  background-color: #14cf3d !important;
+}
+
+.cart:active {
+  background-color: #25dd4d !important;
 }
 
 .search {
-font-size: 20px;
-width: 50vw;
-line-height: 2.5;
-margin-left: 5vw;
+  font-size: 20px;
+  width: 50vw;
+  line-height: 2.5;
+  margin-left: 5vw;
 }
+
 .search::placeholder {
-color: #acacac;
-font-family: 'Fira Sans';
+  color: #acacac;
+  font-family: 'Fira Sans';
 }
+
 input {
-padding-left: 20px;
-border-radius: 15px;
-border-width: 0px;
-}
-</style>
+  padding-left: 20px;
+  border-radius: 15px;
+  border-width: 0px;
+}</style>
