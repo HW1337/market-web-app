@@ -1,6 +1,7 @@
 <template>
-  <SearchHeader @search="updateSearchTerm" />
+  <SearchHeader @search="updateSearchTerm" @cart="makeCartVisible"/>
   <ProductList :products="products" :searchQuery="searchTerm" />
+  <cart-dialog v-model:show="cartVisible"></cart-dialog>
 </template>
 
 <script>
@@ -12,6 +13,7 @@ export default {
     return {
       products: [],
       searchTerm: '',
+      cartVisible: false,
     };
   },
   components: {
@@ -22,6 +24,9 @@ export default {
     updateSearchTerm(term) {
       this.searchTerm = term;
     },
+    makeCartVisible() {
+      this.cartVisible = true;
+    }
   },
 };
 </script>
