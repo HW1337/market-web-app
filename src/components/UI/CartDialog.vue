@@ -38,6 +38,6 @@
     background-color: white;
     border-radius: 12px;
     padding: 25px;
-    width: 1000px;
+    width: max-content;
 }
 </style>
