@@ -25,7 +25,7 @@
 
 <style scoped>
 .dialog {
-    top: 0;
+    top: 80px;
     bottom: 0;
     right: 0;
     left: 0;
@@ -38,6 +38,7 @@
     background-color: white;
     border-radius: 12px;
     padding: 25px;
+    min-width: 350px;
     width: max-content;
 }
 </style>

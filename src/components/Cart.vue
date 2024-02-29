@@ -5,8 +5,8 @@
         <div v-if="cart !== null" v-for="(cart, index) in cart" :key="cart.id">
             <div class="item-container">
                 <img :src="cart.image" alt="Картинка">
-                <div class="title__content"><h3 class="title">{{ cart.title }}</h3> 
-                <h3 v-if="cart.quantity>1">x{{ cart.quantity }}</h3></div>
+                <div class="title__content"><h3 class="title">{{ truncateTitle(cart.title, 10, 35) }}</h3> 
+                <div class="quantity" v-if="cart.quantity>1">x{{ cart.quantity }}</div></div>
                 <span><cart-button @click="addQuantity(index)" class="add">+</cart-button></span>
                 <span><cart-button @click="removeQuantity(index)" class="add">-</cart-button></span>
                 <h3 class="price">{{ cart.price }}$</h3>
@@ -42,7 +42,18 @@ export default {
             {this.cart[index].quantity --} else {
                 this.cart.splice(index, 1);
             }
-        }
+        },
+        truncateTitle(title, wordCount, charLimit) {
+            const words = title.split(' ');
+            const truncatedWords = words.slice(0, wordCount);
+            let truncatedTitle = truncatedWords.join(' ');
+            if (truncatedTitle.length > charLimit) {
+                const lastSpaceIndex = truncatedTitle.lastIndexOf(' ', charLimit);
+                truncatedTitle = truncatedTitle.slice(0, lastSpaceIndex);
+                truncatedTitle += '...';
+            }
+            return truncatedTitle;
+        },
     },
 }
 </script>
@@ -54,7 +65,7 @@ img {
 }
 .title__content {
     display: flex;
-
+    align-items: center;
 }
 .title {
     margin-right: 10px;
@@ -72,7 +83,7 @@ img {
     align-items: center;
     justify-content: space-between;
 }
-.order {
+.quantity {
     
 }
 </style>
