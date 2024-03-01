@@ -6,6 +6,7 @@
         <search-input v-model="searchTerm" @input="searchMethod" type="text" name="query"
           placeholder="Найти на Homeshrooms" class="search"></search-input>
         <cart-button class="cart" @click="this.$emit('cart');">Корзина</cart-button>
+        <div class="cart-quantity" v-if="cartQuantity>0">{{cartQuantity}}</div>
       </div>
     </div>
   </header>
@@ -22,6 +23,9 @@ export default {
     searchMethod() {
       this.$emit('search', this.searchTerm);
     },
+  },
+  props: {
+    cartQuantity: Number
   },
 };
 </script>
@@ -53,7 +57,21 @@ header {
 .logo:hover {
   animation: shake 0.5s ease;
 }
-
+.cart-quantity {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: red;
+  border: 1px solid rgb(255, 255, 255) ;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
 .logo {
   height: 50px;
   margin-right: 10px;
