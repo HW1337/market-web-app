@@ -23,12 +23,14 @@
 
 <script>
 export default {
+    emits: ['refreshCartQuantity'],
     data() {
         return {
         };
     },
     props: {
         cart: Array,
+        cartQuantity: Number,
     },
     methods: {
         calculateTotal() {
@@ -36,12 +38,14 @@ export default {
         },
         addQuantity(index) {
             this.cart[index].quantity ++
+            this.$emit("refreshCartQuantity")
         },
         removeQuantity(index) {
             if (this.cart[index].quantity !== 1)
             {this.cart[index].quantity --} else {
                 this.cart.splice(index, 1);
             }
+            this.$emit("refreshCartQuantity")
         },
         truncateTitle(title, wordCount, charLimit) {
             const words = title.split(' ');
@@ -82,8 +86,5 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.quantity {
-    
 }
 </style>

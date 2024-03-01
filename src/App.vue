@@ -1,7 +1,7 @@
 <template>
-  <SearchHeader @search="updateSearchTerm" @cart="makeCartVisible"/>
+  <SearchHeader @search="updateSearchTerm" @cart="makeCartVisible" :cartQuantity="cartQuantity"/>
   <ProductList :products="products" :searchQuery="searchTerm" @addToCart="addToCart"/>
-  <cart-dialog v-model:show="cartVisible" ><Cart :cart="cart"/></cart-dialog>
+  <cart-dialog v-model:show="cartVisible" ><Cart :cart="cart" @refreshCartQuantity="refreshCartQuantity"/></cart-dialog>
 </template>
 
 <script>
@@ -15,7 +15,8 @@ export default {
       products: [],
       searchTerm: '',
       cartVisible: false,
-      cart: []
+      cart: [],
+      cartQuantity: 0,
     };
   },
   components: {
@@ -36,7 +37,12 @@ export default {
         existingItem.quantity++
       } else {
         this.cart.push({ ...item, quantity: 1 })
+        
       }
+      this.cartQuantity = this.cart.reduce((acc, el)=> acc + el.quantity, 0)
+    },
+    refreshCartQuantity () {
+      this.cartQuantity = this.cart.reduce((acc, el)=> acc + el.quantity, 0)
     }
   },
 };
