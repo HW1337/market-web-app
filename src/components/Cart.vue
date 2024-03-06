@@ -1,7 +1,10 @@
 <template>
+    <div class="head">
     <h1>
         Корзина
     </h1>
+    <button class="cross" pointer @click.stop="this.$emit('update:show', false)">X</button>
+</div>
         <div v-if="cart !== null" v-for="(cart, index) in cart" :key="cart.id">
             <div class="item-container">
                 <img :src="cart.image" alt="Картинка">
@@ -86,5 +89,25 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.order {
+    font-size: 18px !important;
+}
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cross {
+    font-size: 30px;
+    color: rgb(70, 70, 70);
+    background-color: rgb(202, 202, 202);
+    border-radius: 12px;
+    padding: 0 9px;
+    cursor: pointer;
+    border: 0;
+}
+.cross:hover {
+    background-color: rgb(190, 190, 190);
 }
 </style>

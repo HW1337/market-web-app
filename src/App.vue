@@ -1,7 +1,7 @@
 <template>
   <SearchHeader @search="updateSearchTerm" @cart="makeCartVisible" :cartQuantity="cartQuantity"/>
   <ProductList :products="products" :searchQuery="searchTerm" @addToCart="addToCart"/>
-  <cart-dialog v-model:show="cartVisible" ><Cart :cart="cart" @refreshCartQuantity="refreshCartQuantity"/></cart-dialog>
+  <cart-dialog v-model:show="cartVisible" ><Cart v-model:show="cartVisible" :cart="cart" @refreshCartQuantity="refreshCartQuantity"/></cart-dialog>
 </template>
 
 <script>
