@@ -4,18 +4,20 @@
             Корзина
         </h1>
         <button class="cross" pointer @click.stop="this.$emit('update:show', false)">X</button>
-    </div> <div class="content">
-    <div v-if="cart !== null" v-for="(cart, index) in paginatedProducts" :key="cart.id">
-        <div class="item-container">
-            <img :src="cart.image" alt="Картинка">
-            <div class="title__content">
-                <h3 class="title">{{ truncateTitle(cart.title, 10, 35) }}</h3>
-                <div class="quantity" v-if="cart.quantity > 1">x{{ cart.quantity }}</div>
+    </div>
+    <div class="content" v-if="cart.length > 0">
+        <div v-for="(cart, index) in paginatedProducts" :key="cart.id">
+            <div class="item-container">
+                <img :src="cart.image" alt="Картинка">
+                <div class="title__content">
+                    <h3 class="title">{{ truncateTitle(cart.title, 10, 35) }}</h3>
+                    <div class="quantity" v-if="cart.quantity > 1">x{{ cart.quantity }}</div>
+                </div>
+                <span><cart-button @click="addQuantity(index)" class="add">+</cart-button></span>
+                <span><cart-button @click="removeQuantity(index)" class="add">-</cart-button></span>
+                <h3 class="price">{{ cart.price }}$</h3>
             </div>
-            <span><cart-button @click="addQuantity(index)" class="add">+</cart-button></span>
-            <span><cart-button @click="removeQuantity(index)" class="add">-</cart-button></span>
-            <h3 class="price">{{ cart.price }}$</h3>
-        </div></div>
+        </div>
     </div>
     <div class="footer">
         <div class="pages" v-if="cart.length > 0">
@@ -88,6 +90,7 @@ export default {
                 this.page--;
             }
         },
+        
     },
     computed: {
         totalPages() {
@@ -157,6 +160,7 @@ img {
     cursor: pointer;
     border: 0;
 }
+
 .content {
 
     border: 1px solid rgba(128, 128, 128, 0.479);
@@ -165,6 +169,7 @@ img {
     padding: 15px 15px;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
+
 .cross:hover {
     background-color: rgb(190, 190, 190);
 }
