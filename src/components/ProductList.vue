@@ -4,6 +4,7 @@
     <ProductItem v-for="product in filteredProducts" :key="product.id" :product="product" @addToCart="addToCart"/>
   </TransitionGroup>
   </div>
+  <div class="page__wrapper"><div v-for="page in totalPages" :key="page" class="page"> {{ page }}</div></div>
 </template>
   
 <script>
@@ -21,11 +22,20 @@ export default {
   data() {
     return {
       products: [],
+      page: 1,
+      limit: 10,
+      totalPages: 0,
     };
   },
   mounted() {
-    axios.get('https://fakestoreapi.com/products')
+    axios.get('https://fakestoreapi.com/products', {
+      params: {
+        page: this.page,
+        limit: this.limit
+      }
+    })
       .then(response => {
+        this.totalPages = (20 / this.limit)
         this.products = response.data;
       })
       .catch(error => {
@@ -35,7 +45,7 @@ export default {
   methods: {
     addToCart(item) {
       this.$emit("addToCart", item)
-    }
+    },
   },
   computed: {
     filteredProducts() {
@@ -66,5 +76,13 @@ export default {
 .list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+.page__wrapper {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+}
+.page {
+  padding: 10px;
 }
 </style>
