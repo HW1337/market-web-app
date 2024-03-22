@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="image-container">
-            <img :src="product.image" alt="Картинка">
+            <img :src="product.image" alt="Картинка" @click="$router.push(`/products/${product.id}`)">
         </div>
         <h3 class="title">{{ truncateTitle(product.title, 12, 60) }}</h3>
         <div class="buy">
@@ -75,6 +75,7 @@ export default {
 .image-container img {
     max-width: 95%;
     max-height: 95%;
+    cursor: pointer;
 }
 
 .title {
