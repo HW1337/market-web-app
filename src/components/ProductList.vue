@@ -4,7 +4,7 @@
       <ProductItem v-for="product in filteredProducts" :key="product.id" :product="product" @addToCart="addToCart" />
     </TransitionGroup>
   </div>
-  <div ref="observer"></div>
+  <div v-intersection="loadProducts"></div>
 </template>
 
 <script>
@@ -37,15 +37,6 @@ export default {
       .catch(error => {
         console.error('Error fetching products:', error);
       });
-      let options = {
-        rootMargin: "0px",
-        threshold: 1,
-      };
-      const callback = (entries, observer) => {
-        if (entries[0].isIntersecting) {this.loadProducts()}
-      };
-      let observer = new IntersectionObserver(callback, options);
-      observer.observe(this.$refs.observer);
   },
 
   methods: {
