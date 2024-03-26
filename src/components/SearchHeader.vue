@@ -3,7 +3,7 @@
     <div class="headerplus">
       <div><a class="main-link" href="index.html"><img class="logo" src="favicon.ico">HOMESHROOMS</a></div>
       <div class="input-container">
-        <search-input v-model="searchTerm" @input="searchMethod" type="text" name="query"
+        <search-input :model-value="searchTerm" @update:model-value="updateSearchTerm" type="text" name="query"
           placeholder="Найти на Homeshrooms" class="search"></search-input>
         <cart-button class="cart" @click="this.$emit('cart');">Корзина</cart-button>
         <div class="cart-quantity" v-if="cartQuantity>0">{{cartQuantity}}</div>
@@ -13,19 +13,14 @@
 </template>
 
 <script>
+import {mapState, mapGetters, mapMutations} from 'vuex'
 export default {
-  data() {
-    return {
-      searchTerm: '',
-    }
+  computed: {
+    ...mapState(['searchTerm']),
+    ...mapGetters(['cartQuantity']),
   },
   methods: {
-    searchMethod() {
-      this.$emit('search', this.searchTerm);
-    },
-  },
-  props: {
-    cartQuantity: Number
+    ...mapMutations(['updateSearchTerm']),
   },
 };
 </script>
