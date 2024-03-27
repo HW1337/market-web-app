@@ -6,10 +6,17 @@ export const mainModule = {
     searchTerm: '',
     cart: [],
     productsLimit: 10,
+    page: 1,
+    limit: 4,
   }),
   getters: {
+    setCart(state) {
+      return state.cart
+    },
     cartItems(state) {
-      return state.cart;
+      const startIndex = (state.page - 1) * state.limit;
+      const endIndex = startIndex + state.limit;
+      return state.cart.slice(startIndex, endIndex);
     },
     cartQuantity(state) {
       return state.cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -19,6 +26,18 @@ export const mainModule = {
         return state.products;
       }
       return state.products.filter(product => product.title.toLowerCase().includes(state.searchTerm));
+    },
+    setPage(state) {
+      return state.page
+    },
+    setLimit(state) {
+      return state.limit
+    },
+    totalPages(state) {
+      return Math.ceil(state.cart.length / state.limit);
+    },
+    calculateTotal(state) {
+      return (state.cart.reduce((acc, cartItem) => acc += + cartItem.price * cartItem.quantity, 0)).toFixed(2)
     },
   },
   mutations: {
@@ -37,6 +56,30 @@ export const mainModule = {
         existingItem.quantity++
       } else {
         state.cart.push({ ...item, quantity: 1 })
+      }
+    },
+    nextPage(state) {
+      if (state.page < state.limit) {
+        state.page++
+      }
+    },
+    previousPage(state) {
+      if (state.page > 1) {
+        state.page--;
+      }
+    },
+    addQuantity(state, cartIndex) {
+      console.log(cartIndex);
+      const actualIndex = (state.page - 1) * state.limit + cartIndex;
+      state.cart[actualIndex].quantity++;
+    },
+    removeQuantity(state, cartIndex) {
+      console.log(cartIndex);
+      const actualIndex = (state.page - 1) * state.limit + cartIndex;
+      if (state.cart[actualIndex].quantity !== 1) {
+        state.cart[actualIndex].quantity--;
+      } else {
+        state.cart.splice(actualIndex, 1);
       }
     },
   },

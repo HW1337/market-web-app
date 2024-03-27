@@ -5,7 +5,7 @@
         </h1>
         <button class="cross" pointer @click.stop="this.$emit('update:show', false)">X</button>
     </div>
-    <div class="content" >
+    <div class="content" v-if="setCart.length > 0">
         <div v-for="(cart, index) in cartItems" :key="cart.id">
             <div class="item-container">
                 <img :src="cart.image" alt="Картинка">
@@ -20,55 +20,28 @@
         </div>
     </div>
     <div class="footer">
-        <div class="pages" v-if="cart && cart.length > 0">
-            <cart-button class="add" @click="previousPage" v-if="page !== 1">
-                < </cart-button>
-                    <span> {{ page }} </span>
-                    <cart-button class="add" @click="nextPage" v-if="page !== totalPages"> > </cart-button>
+        <div class="pages" v-if="setCart.length > setLimit">
+            <cart-button class="add" @click="previousPage" v-if="setPage !== 1"> < </cart-button>
+                    <span> {{ setPage }} </span>
+                    <cart-button class="add" @click="nextPage" v-if="setPage !== totalPages"> > </cart-button>
         </div>
         <div class="total">
-            <h2 v-if="cart && cart.length > 0">
-                Итого: {{ calculateTotal() }}$
+            <h2 v-if="setCart.length > 0">
+                Итого: {{ calculateTotal }}$
             </h2>
             <h2 v-else>
                 В корзине нет товаров
             </h2>
-            <cart-button class="order" v-if="cart && cart.length > 0">Заказать</cart-button>
+            <cart-button class="order" v-if="setCart.length > 0">Заказать</cart-button>
         </div>
     </div>
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapMutations} from 'vuex'
 export default {
-    data() {
-        return {
-            page: 1,
-            limit: 4,
-        };
-    },
-    props: {
-        cart: Array,
-        cartQuantity: Number,
-    },
     methods: {
-        calculateTotal() {
-            return (state.cart.reduce((acc, cartItem) => acc += + cartItem.price * cartItem.quantity, 0)).toFixed(2)
-        },
-        addQuantity(cartIndex) {
-            const actualIndex = (this.page - 1) * this.limit + cartIndex;
-            this.cart[actualIndex].quantity++;
-            this.$emit("refreshCartQuantity");
-        },
-        removeQuantity(cartIndex) {
-            const actualIndex = (this.page - 1) * this.limit + cartIndex;
-            if (this.cart[actualIndex].quantity !== 1) {
-                this.cart[actualIndex].quantity--;
-            } else {
-                this.cart.splice(actualIndex, 1);
-            }
-            this.$emit("refreshCartQuantity");
-        },
+        ...mapMutations(['addQuantity', 'removeQuantity', 'nextPage', 'previousPage']),
         truncateTitle(title, wordCount, charLimit) {
             const words = title.split(' ');
             const truncatedWords = words.slice(0, wordCount);
@@ -80,30 +53,10 @@ export default {
             }
             return truncatedTitle;
         },
-        nextPage() {
-            if (this.page < this.limit) {
-                this.page++;
-            }
-        },
-        previousPage() {
-            if (this.page > 1) {
-                this.page--;
-            }
-        },
-
     },
     computed: {
-    ...mapState(['cart']),
-    ...mapGetters(['cartItems']),
-     totalPages() {
-            return Math.ceil(this.cart.length / this.limit);
-        },
-        paginatedProducts() {
-            const startIndex = (this.page - 1) * this.limit;
-            const endIndex = startIndex + this.limit;
-            console.log(state.cart);
-            return this.cart.slice(startIndex, endIndex);
-        },
+    ...mapState(['cart', 'limit', 'page']),
+    ...mapGetters(['cartItems', 'setCart', 'setPage', 'setLimit', 'totalPages', 'calculateTotal']),
     },
 }
 </script>
