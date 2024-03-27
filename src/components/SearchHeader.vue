@@ -5,7 +5,7 @@
       <div class="input-container">
         <search-input :model-value="searchTerm" @update:model-value="updateSearchTerm" type="text" name="query"
           placeholder="Найти на Homeshrooms" class="search"></search-input>
-        <cart-button class="cart" @click="this.$emit('cart');">Корзина</cart-button>
+        <cart-button class="cart" @click="this.$emit('openCart');">Корзина</cart-button>
         <div class="cart-quantity" v-if="cartQuantity>0">{{cartQuantity}}</div>
       </div>
     </div>

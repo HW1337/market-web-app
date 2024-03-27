@@ -1,8 +1,8 @@
 <template>
     <div>
-    <SearchHeader @cart="makeCartVisible"/>
+    <SearchHeader @openCart="makeCartVisible"/>
     <ProductList :products="products"/>
-    <cart-dialog v-model:show="cartVisible" ><Cart v-model:show="cartVisible" :cart="cart"/></cart-dialog>
+    <cart-dialog v-model:show="cartVisible" ><Cart v-model:show="cartVisible"/></cart-dialog>
     </div>
   </template>
   
