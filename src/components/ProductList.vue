@@ -1,71 +1,34 @@
 <template>
   <div class="card-container">
     <TransitionGroup name="list">
-      <ProductItem v-for="product in filteredProducts" :key="product.id" :product="product" @addToCart="addToCart" />
+      <ProductItem v-for="product in filteredProducts" :key="product.id" :product="product"/>
     </TransitionGroup>
   </div>
   <div v-intersection="loadProducts"></div>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import ProductItem from './ProductItem.vue';
 
 export default {
   components: {
     ProductItem,
   },
-  props: {
-    products: Array,
-    searchQuery: String,
-  },
-  data() {
-    return {
-      products: [],
-      limit: 10,
-    };
-  },
   mounted() {
-    axios.get('https://fakestoreapi.com/products', {
-      params: {
-        limit: this.limit
-      }
-    })
-      .then(response => {
-        this.products = response.data;
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });
+    this.loadProducts();
   },
 
   methods: {
-    addToCart(item) {
-      this.$emit("addToCart", item)
-    },
+    ...mapActions(['fetchProducts']),
     loadProducts() {
-      this.limit += 10;
-      axios.get('https://fakestoreapi.com/products', {
-      params: {
-        limit: this.limit
-      }
-    })
-      .then(response => {
-        this.products = response.data;
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });}
+      this.$store.dispatch('increaseLimit', 10);
+      this.$store.dispatch('fetchProducts');
+    },
   },
   computed: {
-    filteredProducts() {
-      if (!this.searchQuery) {
-        return this.products;
-      }
-
-      const searchTerm = this.searchQuery.toLowerCase();
-      return this.products.filter(product => product.title.toLowerCase().includes(searchTerm));
-    },
+    ...mapState(['products', 'productsLimit', 'searchQuery']),
+    ...mapGetters(['filteredProducts']),
   },
 };
 </script>

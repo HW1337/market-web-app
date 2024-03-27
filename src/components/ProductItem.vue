@@ -6,12 +6,13 @@
         <h3 class="title">{{ truncateTitle(product.title, 12, 60) }}</h3>
         <div class="buy">
             <span class="price">{{ product.price }}$</span>
-            <cart-button class="add-to-cart" @click="this.$emit('addToCart', product);">В корзину</cart-button>
+            <cart-button class="add-to-cart" @click="addToCart(product)">В корзину</cart-button>
         </div>
     </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
     props: {
         product: {
@@ -20,6 +21,7 @@ export default {
         },
     },
         methods: {
+        ...mapActions(['addToCart']),
         truncateTitle(title, wordCount, charLimit) {
             const words = title.split(' ');
             const truncatedWords = words.slice(0, wordCount);
