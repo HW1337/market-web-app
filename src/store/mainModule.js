@@ -13,6 +13,9 @@ export const mainModule = {
     setCart(state) {
       return state.cart
     },
+    setProducts(state) {
+      return state.products
+    },
     cartItems(state) {
       const startIndex = (state.page - 1) * state.limit;
       const endIndex = startIndex + state.limit;
