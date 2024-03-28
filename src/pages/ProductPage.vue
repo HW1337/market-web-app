@@ -1,18 +1,24 @@
 <template>
   <div>
-    <div v-if="products" class="product">
-      <h2 class="product-title">{{ products.title }}</h2>
+    <div v-if="getProduct(setProducts, this.$route.params.id)" class="product">
+      <h2 class="product-title">{{ getProduct(setProducts, this.$route.params.id).title }}</h2>
       <div class="product-details">
         <div class="product-image">
-          <img :src="products.image" alt="Фото товара">
+          <img :src="getProduct(setProducts, this.$route.params.id).image" alt="Фото товара">
         </div>
         <div class="product-info">
-          <p class="product-price"><strong>Цена:</strong> ${{ products.price }}</p>
-          <p class="product-description"><strong>Описание:</strong> {{ products.description }}</p>
-          <p class="product-category"><strong>Категория:</strong> {{ products.category }}</p>
-          <p v-if="products.rating" class="product-rating"><strong>Рейтинг:</strong> {{ products.rating.rate }} (на основе {{ products.rating.count }} оценок)</p>
+          <p class="product-price"><strong>Цена:</strong> ${{ getProduct(setProducts, this.$route.params.id).price }}
+          </p>
+          <p class="product-description"><strong>Описание:</strong> {{ getProduct(setProducts
+      , this.$route.params.id).description }}</p>
+          <p class="product-category"><strong>Категория:</strong> {{ getProduct(setProducts
+      , this.$route.params.id).category }}</p>
+          <p v-if="getProduct(setProducts, this.$route.params.id).rating" class="product-rating"><strong>Рейтинг:</strong> {{ getProduct(setProducts
+      , this.$route.params.id).rating.rate }} (на
+            основе {{ getProduct(setProducts, this.$route.params.id).rating.count }} оценок)</p>
           <p v-else class="product-rating"><strong>Рейтинг:</strong> Не доступен</p>
-          <cart-button class="add-to-cart" @click="this.$emit('addToCart', product);">В корзину</cart-button>
+          <cart-button class="add-to-cart" @click="addToCart(getProduct(setProducts ,this.$route.params.id));">В
+            корзину</cart-button>
           <router-link to="/" class="return-to-home"><cart-button>Вернуться на главную</cart-button></router-link>
         </div>
       </div>
@@ -24,23 +30,26 @@
 </template>
 
 <script>
-import axios from 'axios';
-  export default {
-    data() {
-      return {
-        products: {}
+import { mapState, mapGetters, mapActions } from 'vuex';
+export default {
+  methods: {
+    ...mapActions(['addToCart', 'fetchProducts']),
+    getProduct(array, id) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].id == id) {
+          return array[i]
+        }
       }
     },
-    mounted() {
-    axios.get(`https://fakestoreapi.com/products/${this.$route.params.id}`)
-      .then(response => {
-        this.products = response.data;
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });
   },
+  computed: {
+    ...mapState(['products']),
+    ...mapGetters(['setProducts']),
+  },
+  mounted() {
+    this.fetchProducts();
   }
+}
 </script>
 
 <style scoped>
